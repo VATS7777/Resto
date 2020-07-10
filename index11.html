@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Resto</title><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <style>@import "https://fonts.googleapis.com/css?family=Open+Sans";
+  
+html {
+  height: 600px;
+}
+
+body{
+    margin: 0;
+    background-image: url(bg.jpg);
+}
+
+body {
+  color: #F0F3F4;
+  font: normal 16px/1.25 'Open Sans';
+  min-height: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  height: 450px;
+}
+.gallery {
+  list-style-type: none;
+  height: 100%;
+  overflow: hidden;
+}
+.gallery li {
+  float: left;
+  height: 100%;
+  width: 225px;
+  background: #2E4053;
+}
+.gallery .flip {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+
+  -webkit-perspective: 2000px;
+  -moz-perspective: 2000px;
+  perspective: 2000px;
+}
+.gallery li:hover .front-side {
+  opacity: 0;
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+.gallery li:hover .back-side {
+  background: #000;
+  opacity: 1;
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+.gallery .front-side,
+.gallery .back-side {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility:  hidden;
+  -moz-backface-visibility:  hidden;
+  backface-visibility:  hidden;
+
+  -webkit-transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+  -moz-transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+  transition: transform 0.4s ease-out, opacity 0.3s ease-out;
+}
+.gallery .front-side {
+  opacity: 1;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+.gallery .back-side {
+  opacity: 0;
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+.gallery .back-side > a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.gallery li:nth-child(1) .front-side {
+  background-image:url('F1.jpg');
+}
+.gallery li:nth-child(1) .loader {
+  border-top-color: #F39C12;
+  border-left-color: #F39C12;
+}
+.gallery li:nth-child(1) .text h3 {
+  color: #F39C12;
+}
+.gallery li:nth-child(1) .text h3:after {
+  background: #F5B041;
+}
+
+.gallery li:nth-child(2) .front-side {
+  background-image: url('F2.jpg');
+}
+
+.gallery li:nth-child(3) .front-side {
+  background-image: url('F3.jpg');
+}
+.gallery li:nth-child(3) .loader {
+  border-top-color: #424949;
+  border-left-color: #424949;
+}
+.gallery li:nth-child(3) .text h3 {
+  color: #424949;
+}
+.gallery li:nth-child(3) .text h3:after {
+  background: #515A5A;
+}
+
+.gallery li:nth-child(4) .front-side {
+  background-image: url('F4.jpg');
+}
+.gallery li:nth-child(4) .loader {
+  border-top-color: #F1C40F;
+  border-left-color: #F1C40F;
+}
+.gallery li:nth-child(4) .text h3 {
+  color: #F1C40F;
+}
+.gallery li:nth-child(4) .text h3:after {
+  background: #F7DC6F;
+}
+
+.gallery li:nth-child(5) .front-side {
+  background-image: url('F5.jpg');
+}
+.gallery li:nth-child(5) .loader {
+  border-top-color: #1ABC9C;
+  border-left-color: #1ABC9C;
+}
+.gallery li:nth-child(5) .text h3 {
+  color: #1ABC9C;
+}
+.gallery li:nth-child(5) .text h3:after {
+  background: #48C9B0;
+}
+
+.gallery li:nth-child(6) .front-side {
+  background-image: url('F6.jpg');
+}
+.gallery li:nth-child(6) .loader {
+  border-top-color: #E74C3C;
+  border-left-color: #E74C3C;
+}
+.gallery li:nth-child(6) .text h3 {
+  color: #E74C3C;
+}
+.gallery li:nth-child(6) .text h3:after {
+  background: #EC7063;
+}
+
+.gallery .content {
+  text-align: center;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  top: 30%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  transform: translateY(-50%);
+  padding: 25px 20px;
+}
+
+.gallery li:hover .text {
+  opacity: 1;
+  visibility: visible;
+  max-height: 2000px;
+  -webkit-transition: opacity .3s ease-in 1.5s, max-height .1s ease 1.5s;
+  -moz-transition: opacity .3s ease-in 1.5s, max-height .1s ease 1.5s;
+  transition: opacity .3s ease-in 1.5s, max-height .1s ease 1.5s;
+}
+.gallery li:hover .loader {
+  opacity: 1;
+  visibility: visible;
+  -webkit-animation: hide .1s ease-in-out 1.4s forwards, load .75s infinite;
+  -moz-animation: hide .1s ease-in-out 1.4s forwards, load .75s infinite;
+  animation: hide .1s ease-in-out 1.4s forwards, load .75s infinite;
+}
+.gallery .text {
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+}
+.gallery .content h3 {
+  position: relative;
+  color: #3498DB;
+  font: normal 30px/1.25 'Open Sans';
+  margin-bottom: 25px;
+}
+.gallery .content h3:after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 3px;
+  bottom: -10px;
+  left: 50%;
+  margin-left: -25px;
+  background: #85C1E9;
+}
+.gallery .content pre {
+  margin: 10px 0;
+  color: #D6DBDF;
+  font: normal 16px/1.25 'Open Sans';
+}
+.gallery .loader {
+  opacity: 0;
+  visibility: hidden;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: auto;
+  border: 4px solid transparent;
+  border-top-color: #3498DB;
+  border-left-color: #3498DB;
+}
+
+@-webkit-keyframes load {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+@-moz-keyframes load {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+  }
+}
+@keyframes load {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes hide {
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@-moz-keyframes hide {
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@keyframes hide {
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+a {
+  color: #333;
+  font-size: 14px;
+  text-decoration: none;
+  margin: 15px 0;
+}
+
+button {
+  margin: 50px;
+  border-radius: 20px;
+  border: 1px solid #FF4B2B;
+  background-color: #FF4B2B;
+  color: #FFFFFF;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 12px 45px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: transform 80ms ease-in;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+button:focus {
+  outline: none;
+}
+
+</style>
+</head>
+<body>
+
+<a href="index2.html">
+<button>
+  Home
+</button>
+</a>
+
+<a href="index12.html">
+<button>
+  Special Recipes
+</button>
+</a>
+
+
+<a href="index13.html">
+<button>
+  All Recipes
+</button>
+</a>
+
+<a href="indexall.html">
+<button>
+  Recipes Categories
+</button>
+</a>
+
+<h1>Trending Recipes</h1>
+
+<div class="container">
+  <ul class="gallery">
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/blt-pasta-salad-recipe/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>BLT Pasta Salad</h3>
+                <pre>
+10 ingredients
+Meat
+4 slices Bacon
+Produce
+1 5 cup chopped tomatoes
+1/2 cup Red onion
+4 cups Romaine lettuce
+Condiments
+1/4 cup Mayonnaise
+1/4 cup Ranch dressing
+Pasta & Grains
+2 cups Farfalle pasta
+Baking & Spices
+1/4 tsp Black pepper, ground
+Oils & Vinegars
+1 tbsp Apple cider vinegar
+Dairy
+1/4 cup Sour cream
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/shrimp-fried-rice/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>Easy Shrimp Fried Rice</h3>
+                <pre>
+15 ingredients
+Seafood
+1 lb Shrimp, small
+Produce
+1/2 cup Corn, whole kernel
+2 tsp Garlic
+1/4 tsp Ginger, ground
+3 Green onions
+1 cup Peas and carrots
+Refrigerated
+2 Eggs, large
+Condiments
+3 tbsp Soy sauce, low-sodium
+Pasta & Grains
+4 cups Rice, cooked
+Baking & Spices
+1/4 tsp Black pepper
+2 tsp Cornstarch
+1/2 tsp Salt
+1/4 tsp Turmeric, ground
+Oils & Vinegars
+2 tsp Canola oil
+1 tsp Sesame oil                  
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/cherry-pie-crumb-bars-recipe/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>Cherry Pie Crumb Bars</h3>
+                <pre>
+9 ingredients
+Produce
+2 cups Cherries, fresh
+Condiments
+1 tbsp Lemon juice
+Baking & Spices
+1 1/2 cup All-purpose flour
+1/2 tsp Baking powder
+1/2 tsp Baking soda
+1 tbsp Cornstarch
+1/2 cup Granulated sugar
+1/4 tsp Salt
+Dairy
+        1/2 cup Butter            
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/lemon-garlic-tuna-cakes/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>Lemon Garlic Tuna Cakes</h3>
+                <pre>
+13 ingredients
+Seafood
+2 5 oz. cans Tuna in water
+Produce
+3 Garlic cloves
+1 tbsp Lemon, zest
+1 tsp Parsley, dried
+1/4 cup White onion
+Refrigerated
+1 Egg, large
+Condiments
+1 tsp Lemon juice
+2 tbsp Mayo
+Baking & Spices
+1/4 tsp Black pepper
+1/4 tsp Salt
+Oils & Vinegars
+2 tbsp Olive oil
+Bread & Baked Goods
+1/2 cup Bread crumb, plain
+Dairy
+7/16 cup Parmesan    
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/creamy-cucumber-tomato-salad-recipe/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>Creamy Cucumber Tomato Salad</h3>
+                <pre>
+10 ingredients
+Produce
+1 Cucumber
+1/2 tsp Dill, dried
+1/2 tsp Garlic
+1/4 cup Parsley
+1/2 Red onion
+2 Roma tomatoes, large
+Condiments
+2 tbsp Lemon juice
+Baking & Spices
+1/4 tsp Black pepper
+1/2 tsp Salt
+Dairy
+      1/2 cup Sour cream               
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="flip">
+        <div class="front-side"></div>
+        <div class="back-side">
+          <a href="https://www.crunchycreamysweet.com/creamy-cucumber-tomato-salad-recipe/">
+            <div class="content">
+              <div class="loader"></div>
+              <div class="text">
+                <h3>Creamy Cucumber Tomato Salad</h3>
+                <pre>
+10 ingredients
+Produce
+1 Cucumber
+1/2 tsp Dill, dried
+1/2 tsp Garlic
+1/4 cup Parsley
+1/2 Red onion
+2 Roma tomatoes, large
+Condiments
+2 tbsp Lemon juice
+Baking & Spices
+1/4 tsp Black pepper
+1/2 tsp Salt
+Dairy
+      1/2 cup Sour cream               
+                </pre>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>
+</body>
+</html>
